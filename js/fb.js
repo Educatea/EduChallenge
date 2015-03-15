@@ -51,6 +51,7 @@ function build_current_user(){
             return true;
         },
         error: errorHandler});
+    return true;
 }
 
 function getInfo() {
