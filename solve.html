@@ -30,10 +30,6 @@
     <div class="container" style="width: 100%" id="container">
 
     </div>
-    <div class="container" style="width: 100%">
-        <a class="btn btn-primary" href="statistics.html" style="width: 100%; margin-bottom: 10px">Statistics</a>
-        <button class="btn btn-primary" onclick="log_out();" style="width: 100%; margin-bottom: 100px">Log Out</button>
-    </div>
 
     <footer class="footer">
         <div class="container">
@@ -62,20 +58,15 @@
     <script src="js/loading.js"></script>
     <script src="js/common-scripts.js"></script>
     <script src="js/revulation-slide.js"></script>
+    <script src="cordova.js"></script>
+    <script src="openfb.js"></script>
     <script>
-        function sortJsonName(a,b){
-            return a.order > b.order ? 1 : -1;
-        };
         $(document).ready(function(){
-            if(!is_logged_in()){
-                window.location.replace("index.html");
-            }
-            var url = "http://educatea.com.ar/api/v1/exercises/" + getUrlVars().exercise_id;
+            var url = "http://educatea.com.ar/api/v1/exercises/5";
             $.ajax({
                 type: "GET",
                 url: url,
                 success: function(data){
-                    console.log(data);
                     model_name = data.model_name;
                     values = data.values;
                     html = '<h3>'+data.generate_text+'</h3><ul>';
@@ -88,12 +79,12 @@
                 error: error,
                 timeout: timeout,
                 headers: {
-                    "Authorization": "Basic " + btoa(localStorage['email'] + ":" + localStorage['pass'])
+                    "Authorization": "Basic " + btoa('facundolopez@gmail.com' + ":" + 'contrasenaalumnos')
                 }
             });
         });
         function solve (ans) {
-            var url = "http://educatea.com.ar/api/v1/exercises/solve"
+            var url = "http://educatea.com.ar/api/v1/exercises/solve";
             $.ajax({
                 dataType: "json",
                 data: { answer: ans, iteration: "1", level: "3", exercise: model_name, values: values },
@@ -106,7 +97,7 @@
                 error: error,
                 timeout: timeout,
                 headers: {
-                    "Authorization": "Basic " + btoa(localStorage['email'] + ":" + localStorage['pass'])
+                    "Authorization": "Basic " + btoa('facundolopez@gmail.com' + ":" + 'contrasenaalumnos')
                 }
             });
         }
