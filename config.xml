@@ -62,7 +62,7 @@
     <!-- Third party plugins -->
     <gap:plugin name="com.adobe.plugins.gaplugin" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-    <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
+    <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
         <param name="APP_ID" value="804318116309818" />
         <param name="APP_NAME" value="Educhallenge" />
     </gap:plugin>
