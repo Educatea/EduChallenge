@@ -1,9 +1,9 @@
 
 // Defaults to sessionStorage for storing the Facebook token
-openFB.init({appId: '804318116309818'});
+//openFB.init({appId: '804318116309818'});
 
 //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
-//  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
+  openFB.init({appId: '804318116309818', tokenStore: window.localStorage});
 
 function login() {
     openFB.login(
