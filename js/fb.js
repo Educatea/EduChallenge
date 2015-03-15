@@ -37,21 +37,17 @@ function build_current_user(){
     openFB.api({
         path: '/me',
         success: function(data) {
-            alert('Got the data! '+data.name);
-            alert('I have the token: '+localStorage['fb_token']);
-            alert('I have the id: '+ data.id);
-            alert('I have the name: '+ data.name);
             img = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
-            alert('I have the img: '+ img);
             current_user = { 'id': data.id,'token': localStorage['fb_token'], 'name': data.name,'img': img };
-            alert('I created the object: '+current_user);
-            alert('Saving to localStorage..');
             localStorage['current_user'] = JSON.stringify(current_user);
-            alert('saved!');
+            alert('saved! '+JSON.parse(localStorage['current_user']).name);
             return true;
+            alert('Return with no effect!');
         },
         error: errorHandler});
+    alert('back to build!');
     return true;
+    alert('Return with no effect(2)!');
 }
 
 function getInfo() {
