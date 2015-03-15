@@ -63,73 +63,10 @@
     <script src="js/common-scripts.js"></script>
     <script src="js/cordova.js"></script>
     <script src="js/revulation-slide.js"></script>
-    <script>
-
-        // $(document).ready(function(){
-        //     var fbLoginSuccess = function (userData) {
-        //         alert("UserInfo: " + JSON.stringify(userData));
-        //         facebookConnectPlugin.getAccessToken(function(token) {
-        //             alert("Token: " + token);
-        //         }, function(err) {
-        //             alert("Could not get access token: " + err);
-        //         });
-        //     }
-
-        // facebookConnectPlugin.login(["public_profile"],
-        //     fbLoginSuccess,
-        //     function (error) { alert("" + error) }
-        // );
-        //if(is_logged_in()){
-            //     if(localStorage['user_role'] == "Student"){
-            //         window.location.replace("statistics.html");
-            //     }else{
-            //         window.location.replace("teacher.html");
-            //     }
-            // }
-        // });
-
-        // function sign_in(){
-        //    $.blockUI({ css: {
-        //        border: 'none',
-        //        padding: '15px',
-        //        backgroundColor: '#000',
-        //        '-webkit-border-radius': '10px',
-        //        '-moz-border-radius': '10px',
-        //        opacity: .5,
-        //        color: '#fff'
-        //    } });
-        //     email = $('#email').val();
-        //     pass = $('#pass').val();
-        //     auth(email, pass);
-        //     if(is_logged_in()){
-        //         if(localStorage['user_role'] == "Student"){
-        //             window.location.href = "statistics.html";
-        //         }else{
-        //             window.location.href = "teacher.html";
-        //         }
-        //     }else{
-        //         setTimeout(function () {
-        //             if(localStorage['logged_in'] == 'true'){
-        //                 if(localStorage['user_role'] == "Student"){
-        //                     window.location.href = "statistics.html";
-        //                 }else{
-        //                     window.location.href = "teacher.html";
-        //                 }
-        //             }else{
-        //                 $('#invalid').show();
-        //             }
-        //             done();
-        //         }, 1000);
-        //     }
-        // }
-
-        
-    </script>
-     <script type="text/javascript">
+    <script type="text/javascript">
             var login = function () {
                 if (!window.cordova) {
-                    var appId = prompt("Enter FB Application ID", "");
-                    facebookConnectPlugin.browserInit(appId);
+                    facebookConnectPlugin.browserInit(804318116309818);
                 }
                 facebookConnectPlugin.login( ["email"],
                     function (response) { alert(JSON.stringify(response)) },
@@ -147,25 +84,7 @@
                     function (response) { alert(JSON.stringify(response)) },
                     function (response) { alert(JSON.stringify(response)) }); 
             }
-            var logPurchase = function () {
-                facebookConnectPlugin.logPurchase(1.99, "USD",
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            var logEvent = function () {
-                // For more information on AppEvent param structure see
-                // https://developers.facebook.com/docs/ios/app-events
-                // https://developers.facebook.com/docs/android/app-events
-                facebookConnectPlugin.logEvent("Purchased",
-                    {
-                        NumItems: 1,
-                        Currency: "USD",
-                        ContentType: "shoes",
-                        ContentID: "HDFU-8452"
-                    }, null,
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
+            
             var getAccessToken = function () { 
                 facebookConnectPlugin.getAccessToken( 
                     function (response) { alert(JSON.stringify(response)) },
