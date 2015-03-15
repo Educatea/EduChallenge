@@ -15,6 +15,7 @@ function login() {
         opacity: .5,
         color: '#fff'
     } });
+    alert('making login..');
     openFB.login(
         function(response) {
             if(response.status === 'connected') {
