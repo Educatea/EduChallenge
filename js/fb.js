@@ -18,7 +18,6 @@ function login() {
     openFB.login(
         function(response) {
             if(response.status === 'connected') {
-
                 localStorage['fb_token'] = response.authResponse.token;
                 alert('Building current_user object..');
                 openFB.api({
@@ -28,11 +27,11 @@ function login() {
                         current_user = { 'id': data.id,'token': localStorage['fb_token'], 'name': data.name,'img': img };
                         localStorage['current_user'] = JSON.stringify(current_user);
                         alert('saved! '+JSON.parse(localStorage['current_user']).name);
+                        alert('Wooohoo! Finished making the object! '+ JSON.parse(localStorage['current_user']));
+                        done();
+                        window.location.href = "main.html";
                     },
                     error: errorHandler});
-                alert('Wooohoo! Finished making the object! '+ JSON.parse(localStorage['current_user']));
-                done();
-                window.location.href = "main.html";
             } else {
                 done();
                 alert('Facebook login failed: ' + response.error);
