@@ -27,10 +27,23 @@
     <a class="event listening button btn btn-success" style="margin: 100px;" onclick="getStatus();">Get login status with Facebook</a>
     <a class="event listening button btn btn-success" style="margin: 100px;" onclick="logout();">Logout with Facebook</a>
 </div>
+<div id=\"fb-root\"></div>
 
     <script src="js/jquery.js"></script>
     <script src="cordova.js"></script>
+    <script type="text/javascript" src="cdv-plugin-fb-connect.js"></script>
+    <script type="text/javascript" src="facebook-js-sdk.js"></script>
     <script src="js/facebookConnectPlugin.js"></script>
+    <script type="text/javascript">
+document.addEventListener('deviceready', function() {
+try {
+FB.init({appId: 804318116309818, nativeInterface: CDV.FB, useCachedDialogs: false});
+} catch (e) {
+alert(e);
+}
+} , false);
+</script>
+
     <script type="text/javascript">
             var login = function () {
                 if (!window.cordova) {
