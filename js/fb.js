@@ -40,6 +40,7 @@ function build_current_user(){
             alert('Got the data! '+data.name);
             current_user = { 'id': data.id,'token': localStorage['fb_token'], 'name': data.name,'img': 'http://graph.facebook.com/' + data.id + '/picture?type=small' };
             localStorage['current_user'] = JSON.stringify(current_user);
+            return true;
         },
         error: errorHandler});
 }
