@@ -22,7 +22,7 @@ function login() {
                 openFB.api({
                     path: '/me',
                     success: function(data) {
-                        img = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
+                        img = { 'square': 'http://graph.facebook.com/' + data.id + '/picture?type=square', 'small': 'http://graph.facebook.com/' + data.id + '/picture?type=small', 'normal': 'http://graph.facebook.com/' + data.id + '/picture?type=normal', 'large': 'http://graph.facebook.com/' + data.id + '/picture?type=large' };
                         current_user = { 'id': data.id,'token': localStorage['fb_token'], 'name': data.name,'img': img };
                         localStorage['current_user'] = JSON.stringify(current_user);
                         done();
