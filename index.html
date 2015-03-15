@@ -19,17 +19,18 @@
 
 <body>
      
-    <div class="container" style="width: 100%">
-   <div class="event listening button" onclick="login();">Login with Facebook</div>
-    <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
-    <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
-    <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
-    <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
-    <div class="event listening button" onclick="logout();">Logout with Facebook</div>
+<div class="container" style="width: 100%">
+    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="login();">Login with Facebook</a>
+    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="showDialog();">Show Dialog with Facebook</a>
+    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="apiTest();">Test API with Facebook</a>
+    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="getAccessToken();">Get access token with Facebook</a>
+    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="getStatus();">Get login status with Facebook</a>
+    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="logout();">Logout with Facebook</a>
 </div>
 
     <script src="js/jquery.js"></script>
-    <script src="js/cordova.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/facebookConnectPlugin.js"></script>
     <script type="text/javascript">
             var login = function () {
                 if (!window.cordova) {
