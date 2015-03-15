@@ -20,10 +20,13 @@
 <body>
     <div class="container" style="width: 100%">
 
-        <img src="img/logo_aa2.png">
-        <h1>Welcome to EduChallenge</h1>
-        
-        <button class="btn btn-block btn-primary" onclick="login()">Login with Facebook</button>
+
+        <p>Name: <span id="userName"></span></p>
+        <img id="userPic"/>
+        <hr/>
+
+        <p>Complete Facebook Logout. After logging out, you'll have to login again and provide your Facebook credentials.</p>
+        <button class="btn btn-block" onclick="logout()">Logout</button>
         <hr/>
 
 <!--         <button class="btn btn-block" onclick="getInfo()">Get My Info</button>
@@ -49,9 +52,10 @@
     <script type="text/javascript" src="js/fb.js"></script>
     <script>
         $(document).ready(function(){
-            if(typeof localStorage['fb_token'] !== 'undefined' && localStorage['fb_token'] !== null){
-                window.location.href = "main.html";
+            if(typeof localStorage['fb_token'] == 'undefined' && localStorage['fb_token'] == null){
+                window.location.href = "index.html";
             }
+            getInfo();
         });
     </script>
 
