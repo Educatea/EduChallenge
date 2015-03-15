@@ -66,8 +66,10 @@
             } });
             if(typeof localStorage['fb_token'] == 'undefined' && localStorage['fb_token'] == null){
                 window.location.href = "login.html";
+            }else{
+                getInfo();
             }
-            getInfo();
+            $(JSON.parse(localStorage['current_user'])).appendTo('body');
         });
     </script>
 

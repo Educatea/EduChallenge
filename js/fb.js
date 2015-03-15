@@ -15,11 +15,17 @@ function login() {
         opacity: .5,
         color: '#fff'
     } });
-    alert('making login..');
     openFB.login(
         function(response) {
             if(response.status === 'connected') {
+                openFB.api({
+                    path: '/me',
+                    success: function(data) {
+                        current_user = { 'id': data.id,'token': response.authResponse.token, 'name': data.name,'img': 'http://graph.facebook.com/' + data.id + '/picture?type=small' };
+                    },
+                    error: errorHandler});
                 localStorage['fb_token'] = response.authResponse.token;
+                localStorage['current_user'] = JSON.stringify(current_user);
                 done();
                 window.location.href = "main.html";
             } else {
