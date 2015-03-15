@@ -18,71 +18,94 @@
 </head>
 
 <body>
-     
-<div class="container" style="width: 100%">
-    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="login();">Login with Facebook</a>
-    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="showDialog();">Show Dialog with Facebook</a>
-    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="apiTest();">Test API with Facebook</a>
-    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="getAccessToken();">Get access token with Facebook</a>
-    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="getStatus();">Get login status with Facebook</a>
-    <a class="event listening button btn btn-success" style="margin: 100px;" onclick="logout();">Logout with Facebook</a>
-</div>
-<div id=\"fb-root\"></div>
+    <div class="container" style="width: 100%">
 
+        <button class="btn btn-block" onclick="login()">Login with Facebook</button>
+        <hr/>
+
+        <button class="btn btn-block" onclick="getInfo()">Get My Info</button>
+        <p>Name: <span id="userName"></span></p>
+        <img id="userPic"/>
+        <hr/>
+
+        <textarea id="Message" placeholder="What's on your mind?" rows="5"></textarea>
+        <button class="btn btn-block" onclick="share()">Share</button>
+        <hr/>
+
+        <p>Complete Facebook Logout. After logging out, you'll have to login again and provide your Facebook credentials.</p>
+        <button class="btn btn-block" onclick="logout()">Logout</button>
+        <hr/>
+
+        <p>Revoke App Permissions. After revoking permissions, you'll have to grant permissions again when logging in.</p>
+        <button class="btn btn-block" onclick="revoke()">Revoke Permissions</button>
+
+    </div>
     <script src="js/jquery.js"></script>
     <script src="cordova.js"></script>
-    <script type="text/javascript" src="cdv-plugin-fb-connect.js"></script>
-    <script type="text/javascript" src="facebook-js-sdk.js"></script>
-    <script src="js/facebookConnectPlugin.js"></script>
+    <script src="openfb.js"></script>
     <script type="text/javascript">
-document.addEventListener('deviceready', function() {
-try {
-FB.init({appId: 804318116309818, nativeInterface: CDV.FB, useCachedDialogs: false});
-} catch (e) {
-alert(e);
-}
-} , false);
+
+     // Defaults to sessionStorage for storing the Facebook token
+     openFB.init({appId: '804318116309818'});
+
+    //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
+    //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
+
+    function login() {
+        openFB.login(
+                function(response) {
+                    if(response.status === 'connected') {
+                        alert('Facebook login succeeded, got access token: ' + response.authResponse.token);
+                    } else {
+                        alert('Facebook login failed: ' + response.error);
+                    }
+                }, {scope: 'email,read_stream,publish_stream'});
+    }
+
+    function getInfo() {
+        openFB.api({
+            path: '/me',
+            success: function(data) {
+                console.log(JSON.stringify(data));
+                document.getElementById("userName").innerHTML = data.name;
+                document.getElementById("userPic").src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
+            },
+            error: errorHandler});
+    }
+
+    function share() {
+        openFB.api({
+            method: 'POST',
+            path: '/me/feed',
+            params: {
+                message: document.getElementById('Message').value || 'Testing Facebook APIs'
+            },
+            success: function() {
+                alert('the item was posted on Facebook');
+            },
+            error: errorHandler});
+    }
+
+    function revoke() {
+        openFB.revokePermissions(
+                function() {
+                    alert('Permissions revoked');
+                },
+                errorHandler);
+    }
+
+    function logout() {
+        openFB.logout(
+                function() {
+                    alert('Logout successful');
+                },
+                errorHandler);
+    }
+
+    function errorHandler(error) {
+        alert(error.message);
+    }
+
 </script>
-
-    <script type="text/javascript">
-            var login = function () {
-                if (!window.cordova) {
-                    facebookConnectPlugin.browserInit(804318116309818);
-                }
-                facebookConnectPlugin.login( ["email"],
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            
-            var showDialog = function () { 
-                facebookConnectPlugin.showDialog( { method: "feed" }, 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            
-            var apiTest = function () { 
-                facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) }); 
-            }
-            
-            var getAccessToken = function () { 
-                facebookConnectPlugin.getAccessToken( 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            
-            var getStatus = function () { 
-                facebookConnectPlugin.getLoginStatus( 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            var logout = function () { 
-                facebookConnectPlugin.logout( 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-        </script>
-
 </body>
 </html>
