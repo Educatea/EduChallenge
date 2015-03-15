@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educatea Mobile</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
+    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/flexslider.css"/>
+    <link href="assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/revolution_slider/css/rs-style.css" media="screen">
+    <link rel="stylesheet" href="assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+     <header class="header-frontend">
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header" style="height: 70px;">
+ <div style="margin-left: auto; margin-right: auto; width: 50%; margin-top:10px;">
+                        <img src="img/logo_aa2.png"></div>                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container" style="width: 100%">
+   
+
+  <div class="row">
+    <div class="col-lg-8 col-sm-12 col-lg-offset-2 address">
+    
+    <div class="row" style="text-align: center; margin-top: 20px;display: none;" id="invalid">
+        <div class="col-lg-4"></div>
+        
+        <div class="col-lg-4">
+          <div class="alert alert-danger alert-block fade in">
+            <button data-dismiss="alert" class="close close-sm" type="button" style="position: inherit;">
+              <i class="fa fa-times"></i>
+            </button>
+            <h4>
+              <i class="fa fa-ok-sign"></i>
+              Danger!
+            </h4>
+            <p>Invalid credentials.</p>
+          </div>
+        </div>
+
+    </div>
+
+  <form onsubmit="sign_in();return false;" class="form-signin" style="margin-bottom:200px;">
+    <h2 class="form-signin-heading">WELCOME</h2>
+    <div class="login-wrap">
+    <input autofocus="autofocus" class="form-control" id="email" placeholder="Email" required="required" type="email" style="margin-bottom:15px;">
+    <input autocomplete="off" class="form-control" id="pass" placeholder="Password" required="required" type="password">
+              </span>
+      </label>
+              <input class="btn btn-lg btn-login btn-block" name="commit" type="submit" value="Sign in">
+    </div>
+</form>
+</div>
+</div>
+</div>
+
+    <footer class="site-footer" style="z-index: 1000; position:static; bottom:0px;">
+      <div class="text-center">
+        2015 © Educatea.
+        <a href="#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+        </a>
+      </div>
+    </footer>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/hover-dropdown.js"></script>
+    <script defer src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="assets/bxslider/jquery.bxslider.js"></script>
+    <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/link-hover.js"></script>
+    <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="assets/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="assets/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/common-scripts.js"></script>
+    <script src="js/revulation-slide.js"></script>
+    <script>
+
+        $(document).ready(function(){
+            if(is_logged_in()){
+                if(localStorage['user_role'] == "Student"){
+                    window.location.replace("statistics.html");
+                }else{
+                    window.location.replace("teacher.html");
+                }
+            }
+        });
+
+        function sign_in(){
+           $.blockUI({ css: {
+               border: 'none',
+               padding: '15px',
+               backgroundColor: '#000',
+               '-webkit-border-radius': '10px',
+               '-moz-border-radius': '10px',
+               opacity: .5,
+               color: '#fff'
+           } });
+            email = $('#email').val();
+            pass = $('#pass').val();
+            auth(email, pass);
+            if(is_logged_in()){
+                if(localStorage['user_role'] == "Student"){
+                    window.location.href = "statistics.html";
+                }else{
+                    window.location.href = "teacher.html";
+                }
+            }else{
+                setTimeout(function () {
+                    if(localStorage['logged_in'] == 'true'){
+                        if(localStorage['user_role'] == "Student"){
+                            window.location.href = "statistics.html";
+                        }else{
+                            window.location.href = "teacher.html";
+                        }
+                    }else{
+                        $('#invalid').show();
+                    }
+                    done();
+                }, 1000);
+            }
+        }
+
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educatea Mobile</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
+    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/flexslider.css"/>
+    <link href="assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/revolution_slider/css/rs-style.css" media="screen">
+    <link rel="stylesheet" href="assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="header-frontend">
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header" style="height: 70px;">
+ <div style="margin-left: auto; margin-right: auto; width: 50%; margin-top:10px;">
+                        <img src="img/logo_aa2.png"></div>                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container" style="width: 100%" id="container">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12" id="topics">
+
+            </div>
+        </div>
+    </section>
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12" id="below">
+
+            </div>
+        </div>
+    </section>
+
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12" id="above">
+
+            </div>
+        </div>
+    </section>
+    
+    </div>
+    <div class="container" style="width: 100%">
+        
+      
+        <button class="btn btn-primary" onclick="log_out();" style="width: 100%; margin-bottom: 100px"><i class="fa fa-key"></i> Log Out</button>
+    </div>
+
+    <footer class="site-footer" style="z-index: 1000; position:static; bottom:0px;">
+      <div class="text-center">
+        2015 © Educatea.
+        <a href="#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+        </a>
+      </div>
+    </footer>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/hover-dropdown.js"></script>
+    <script defer src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="assets/bxslider/jquery.bxslider.js"></script>
+    <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/link-hover.js"></script>
+    <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="assets/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="assets/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/common-scripts.js"></script>
+    <script src="js/revulation-slide.js"></script>
+    <script>
+
+        $(document).ready(function(){
+            if(!is_logged_in()){
+                window.location.replace("index.html");
+            }
+
+            var url = "http://educatea.com.ar/api/v1/teachers";
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data){
+                    console.log(data);
+                    html = '<div class="row"><div class="col-lg-12"><section class="panel"><div class="twt-feed blue-bg"><h1>'+data.division.teacher+'</h1><p></p><a href="#"><img src="' +data.school.image.url+'" alt=""></a></div><div class="weather-category twt-category"><ul style="text-align: center;"><li class="active"><h5>'+ data.division.best_grade+'%</h5>Best Grade</li><li><h5>'+ data.division.average+'%</h5>Average</li><li><h5>'+data.division.worst_grade+'%</h5>Worst Grade</li></ul></div></section></div></div><hr><br><div class="col-lg-12"><ul><li><span style="font-size: 12pt;font-weight: bold;"><div class="row state-overview"><div class="col-lg-12"><section class="panel"><div class="symbol red"><i class="fa fa-thumbs-down"></i></div><div class="value"><h1 class=" count2">' + data.division.students_bellow_40 + '</h1><p>Below 40%</p></section></div></div></li></div><div class="row"><div class="col-sm-12"><section class="panel"><header class="panel-heading">Topics</header><table class="table table-striped table-advance table-hover"><thead><tr><th><i class="fa fa-book"></i> Topics</th><th class="hidden-phone"><i class="fa fa-spinner"></i> Progress</th><th><i class="fa fa-star-half"></i> Average</th><th><i class=" fa fa-edit"></i> Status</th></tr></thead><tbody></section></div></div>';
+                    $.each(data.topics, function(key, val){
+                        if (val.percentage != 0) {
+                            html = html + '<tr><td><a href="#">'+val.name+'</a></td><td class="hidden-phone"><div class="progress progress-xs" style="margin-right: 50px"><div class="progress-bar" role="progressbar" aria-valuenow="'+val.class_percentage+'" aria-valuemin="0" aria-valuemax="100" style="width: '+val.class_percentage+'%;"><span class="sr-only">'+val.class_percentage+'% Complete</span></div></div></td><td>'+val.class_average+'% </td>';
+                            if(val.class_percentage == "100"){
+                                html = html + '<td><span class="label label-success label-mini">Complete</span></td>';
+                            }else{
+                                html = html + '<td><span class="label label-warning label-mini">In Progress</span></td>';
+                            }
+                            
+                            html = html + '</tr>';
+                        };
+                    });
+                    html = html + '</tbody></table></section></div></div>';
+                    $(html).appendTo('#topics');
+
+
+                    html = '<div class="row"><div class="col-sm-12"><section class="panel"><header class="panel-heading">Below average students</header><table class="table table-striped table-advance table-hover"><thead><tr><th><i class="fa fa-book"></i> Name</th></tr></thead><tbody>';
+                    $.each(data.bellow_average_students, function(key, val){
+                        if (val.percentage != 0) {
+                            html = html + '<tr><td><a href="#">'+val.full_name+'</a></td></tr>';
+                        };
+                    });
+                    html = html + '</tbody></table></section></div></div>';
+                    $(html).appendTo('#below');
+
+
+
+                    html = '<div class="row"><div class="col-sm-12"><section class="panel"><header class="panel-heading">Above average students</header><table class="table table-striped table-advance table-hover"><thead><tr><th><i class="fa fa-book"></i> Name</th></tr></thead><tbody>';
+                    $.each(data.above_average_students, function(key, val){
+                        if (val.percentage != 0) {
+                            html = html + '<tr><td><a href="#">'+val.full_name+'</a></td></tr>';
+                        };
+                    });
+                    html = html + '</tbody></table></section></div></div>';
+                    $(html).appendTo('#above');
+
+                },
+                error: error,
+                timeout: timeout,
+                headers: {
+                    "Authorization": "Basic " + btoa(localStorage['email'] + ":" + localStorage['pass'])
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>
