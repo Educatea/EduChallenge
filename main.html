@@ -22,6 +22,8 @@
 
 
         <p>Hola <span id="userName"></span></p>
+        <p>Token: <span id="userToken"></span></p>
+        <p>ID: <span id="userId"></span></p>
         <img id="userPic"/>
         <hr/>
 
@@ -67,9 +69,13 @@
             if(typeof localStorage['fb_token'] == 'undefined' && localStorage['fb_token'] == null){
                 window.location.href = "login.html";
             }else{
-                getInfo();
+                current_user = JSON.parse(localStorage['current_user']);
+                $('#userName').append(current_user.name);
+                $('#userPic').attr('src', current_user.img);
+                $('#userToken').append(current_user.token);
+                $('#userId').append(current_user.id);
+                done();
             }
-            alert('Hello from the current_user Object '+JSON.parse(localStorage['current_user']).name);
         });
     </script>
 

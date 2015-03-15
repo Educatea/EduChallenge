@@ -19,15 +19,12 @@ function login() {
         function(response) {
             if(response.status === 'connected') {
                 localStorage['fb_token'] = response.authResponse.token;
-                alert('Building current_user object..');
                 openFB.api({
                     path: '/me',
                     success: function(data) {
                         img = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
                         current_user = { 'id': data.id,'token': localStorage['fb_token'], 'name': data.name,'img': img };
                         localStorage['current_user'] = JSON.stringify(current_user);
-                        alert('saved! '+JSON.parse(localStorage['current_user']).name);
-                        alert('Wooohoo! Finished making the object! '+ JSON.parse(localStorage['current_user']));
                         done();
                         window.location.href = "main.html";
                     },
@@ -43,7 +40,6 @@ function getInfo() {
     openFB.api({
         path: '/me',
         success: function(data) {
-            alert(JSON.stringify(data));
             document.getElementById("userName").innerHTML = data.name;
             document.getElementById("userPic").src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
             done();
