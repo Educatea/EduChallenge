@@ -18,51 +18,19 @@
 </head>
 
 <body>
-     <header class="header-frontend">
-        <div class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header" style="height: 70px;">
- <div style="margin-left: auto; margin-right: auto; width: 50%; margin-top:10px;">
-                        <img src="img/logo_aa2.png"></div>                </div>
-            </div>
-        </div>
-    </header>
+     
     <div class="container" style="width: 100%">
    <div class="event listening button" onclick="login();">Login with Facebook</div>
-            <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
-            <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
-            <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
-            <div class="event listening button" onclick="logPurchase();">Log Purchase Event</div>
-            <div class="event listening button" onclick="logEvent();">Log Regular Event</div>
-            <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
-            <div class="event listening button" onclick="logout();">Logout with Facebook</div>
+    <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
+    <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
+    <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
+    <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
+    <div class="event listening button" onclick="logout();">Logout with Facebook</div>
 </div>
 
-    <footer class="site-footer" style="z-index: 1000; position:static; bottom:0px;">
-      <div class="text-center">
-        2015 © Educatea.
-        <a href="#" class="go-top">
-          <i class="fa fa-angle-up"></i>
-        </a>
-      </div>
-    </footer>
-
     <script src="js/jquery.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/hover-dropdown.js"></script>
-    <script defer src="js/jquery.flexslider.js"></script>
-    <script type="text/javascript" src="assets/bxslider/jquery.bxslider.js"></script>
-    <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/link-hover.js"></script>
-    <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
-    <script type="text/javascript" src="assets/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
-    <script type="text/javascript" src="assets/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-    <script src="js/loading.js"></script>
-    <script src="js/common-scripts.js"></script>
     <script src="js/cordova.js"></script>
-    <script src="js/revulation-slide.js"></script>
+    <script src="js/facebookConnectPlugin.js"></script>
     <script type="text/javascript">
             var login = function () {
                 if (!window.cordova) {
