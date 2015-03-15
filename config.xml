@@ -90,10 +90,10 @@
     <icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
 
      Define app splash screen for each platform. -->
-    <!-- <gap:splash src="img/splash/splash-LDPI.png"  gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="img/splash/splash-LDPI.png"  gap:platform="android" gap:density="ldpi" />
     <gap:splash src="img/splash/splash-MDPI.png"  gap:platform="android" gap:density="mdpi" />
     <gap:splash src="img/splash/splash-HDPI.png"  gap:platform="android" gap:density="hdpi" />
-    <gap:splash src="img/splash/splash-XHDPI.png" gap:platform="android" gap:density="xhdpi" /> -->
+    <gap:splash src="img/splash/splash-XHDPI.png" gap:platform="android" gap:density="xhdpi" />
     <!--
     <gap:splash src="res/screen/blackberry/screen-225.png"         gap:platform="blackberry" />
     <gap:splash src="res/screen/ios/screen-iphone-portrait.png"    gap:platform="ios"     width="320" height="480" />
