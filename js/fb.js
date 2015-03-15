@@ -24,6 +24,7 @@ function getInfo() {
             console.log(JSON.stringify(data));
             document.getElementById("userName").innerHTML = data.name;
             document.getElementById("userPic").src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
+            done();
         },
         error: errorHandler});
 }
@@ -53,7 +54,7 @@ function logout() {
     openFB.logout(
         function() {
             localStorage.removeItem('fb_token');
-            window.location.href = "main.html";
+            window.location.href = "login.html";
         },
         errorHandler);
 }
