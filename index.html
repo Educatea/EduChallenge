@@ -92,13 +92,19 @@
     <script>
 
         $(document).ready(function(){
-            if(is_logged_in()){
-                if(localStorage['user_role'] == "Student"){
-                    window.location.replace("statistics.html");
-                }else{
-                    window.location.replace("teacher.html");
+            facebookConnectPlugin.browserInit(804318116309818);
+            facebookConnectPlugin.getLoginStatus(
+                function (status) {
+                    alert("current status: " + JSON.stringify(status));
                 }
-            }
+            );
+            // if(is_logged_in()){
+            //     if(localStorage['user_role'] == "Student"){
+            //         window.location.replace("statistics.html");
+            //     }else{
+            //         window.location.replace("teacher.html");
+            //     }
+            // }
         });
 
         function sign_in(){
