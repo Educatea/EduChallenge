@@ -20,8 +20,16 @@ function login() {
             if(response.status === 'connected') {
 
                 localStorage['fb_token'] = response.authResponse.token;
-                alert('Gonna build the object!');
-                build_current_user();
+                alert('Building current_user object..');
+                openFB.api({
+                    path: '/me',
+                    success: function(data) {
+                        img = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
+                        current_user = { 'id': data.id,'token': localStorage['fb_token'], 'name': data.name,'img': img };
+                        localStorage['current_user'] = JSON.stringify(current_user);
+                        alert('saved! '+JSON.parse(localStorage['current_user']).name);
+                    },
+                    error: errorHandler});
                 alert('Wooohoo! Finished making the object! '+ JSON.parse(localStorage['current_user']));
                 done();
                 window.location.href = "main.html";
@@ -30,24 +38,6 @@ function login() {
                 alert('Facebook login failed: ' + response.error);
             }
         }, {scope: 'email,read_stream,publish_stream'});
-}
-
-function build_current_user(){
-    alert('Building current_user object..');
-    openFB.api({
-        path: '/me',
-        success: function(data) {
-            img = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
-            current_user = { 'id': data.id,'token': localStorage['fb_token'], 'name': data.name,'img': img };
-            localStorage['current_user'] = JSON.stringify(current_user);
-            alert('saved! '+JSON.parse(localStorage['current_user']).name);
-            return true;
-            alert('Return with no effect!');
-        },
-        error: errorHandler});
-    alert('back to build!');
-    return true;
-    alert('Return with no effect(2)!');
 }
 
 function getInfo() {
