@@ -18,30 +18,27 @@
 </head>
 
 <body>
-    <header class="header-frontend">
-        <div class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html"><img src="img/logo_aa2.png"></a>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="container" style="width: 100%" id="container">
-
-    </div>
-
-    <footer class="footer">
+<header class="header-frontend">
+    <div class="navbar navbar-default navbar-static-top">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-3"></div>
-                <div class="col-lg-5 col-sm-5"></div>
-                <div class="col-lg-3 col-sm-3 col-lg-offset-1" style="text-align: center">
-                    2015 © Educatea.
-                </div>
-            </div>
+            <div class="navbar-header" style="height: 70px;">
+                <div style="margin-left: auto; margin-right: auto; width: 50%; margin-top:10px;">
+                    <img src="img/logo_aa2.png"></div>                </div>
         </div>
-    </footer>
+    </div>
+</header>
+<div class="container" style="width: 100%" id="container">
+
+</div>
+
+<footer class="site-footer" style="z-index: 1000; position:static; bottom:0px;">
+    <div class="text-center">
+        2015 © Educatea.
+        <a href="#" class="go-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+</footer>
 
     <script src="js/jquery.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
@@ -58,7 +55,7 @@
     <script src="js/loading.js"></script>
     <script src="js/common-scripts.js"></script>
     <script src="js/revulation-slide.js"></script>
-    <script src="cordova.js"></script>
+    <!--<script src="cordova.js"></script>-->
     <script src="openfb.js"></script>
     <script>
         $(document).ready(function(){
@@ -69,11 +66,11 @@
                 success: function(data){
                     model_name = data.model_name;
                     values = data.values;
-                    html = '<h3>'+data.generate_text+'</h3><ul>';
+                    html = '<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.generate_text+'</h2></li></ul></div><br><div style="margin-left:10%;">';
                     $.each(data.answers, function(key, val){
-                        html = html + '<li><a class="btn btn-info" onclick="solve('+val+')">' + val + '</a></li>';
+                        html = html + '<a class="btn btn-info btn-lg" style="margin-right:10px; width:20%;" onclick="solve('+val+')">' + val + '</a>';
                     });
-                    html = html + '</ul>';
+                    html = html + '</div><br><br>';
                     $(html).appendTo('#container');
                 },
                 error: error,
@@ -92,7 +89,9 @@
                 url: url,
                 success: function(data){
                     $('#container').empty();
-                    $(data).appendTo('#container');
+                    $('<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data+'</h2></li></ul></div><br>').appendTo('#container');
+                    $("h3").css("max-width", "80%").css("margin-left","10%");
+                    $("h1").css("font-size", "40px");
                 },
                 error: error,
                 timeout: timeout,
