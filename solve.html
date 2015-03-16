@@ -70,7 +70,7 @@
                 url: url,
                 success: function(data){
                     model_name = data.model_name;
-                    values = data.values;
+                    val = data.values;
                     level = data.level;
                     html = '<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.generate_text+'</h2></li></ul></div><br><div style="margin-left:10%;">';
                     $.each(data.answers, function(key, val){
@@ -91,7 +91,7 @@
             var url = "http://educatea.com.ar/api/v1/challenge/exercises/solve";
             $.ajax({
                 dataType: "json",
-                data: { answer: ans, iteration: "1", level: level, exercise: model_name, values: values },
+                data: { answer: ans, iteration: "1", level: level, exercise: model_name, values: val },
                 type: "POST",
                 url: url,
                 success: function(data){
