@@ -55,13 +55,15 @@
     <script src="js/loading.js"></script>
     <script src="js/common-scripts.js"></script>
     <script src="js/revulation-slide.js"></script>
-    <!--<script src="cordova.js"></script>-->
+    <script src="cordova.js"></script>
     <script src="openfb.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script>
         $(document).ready(function(){
-            if(typeof localStorage['current_user'] == 'undefined' && localStorage['current_user'] == null){
+            if(typeof localStorage['current_user'] == 'undefined' || localStorage['current_user'] == null){
                 window.location.href = "login.html";
             }
+
             var url = "http://educatea.com.ar/api/v1/challenge/exercises/120643";
             $.ajax({
                 type: "GET",
@@ -83,6 +85,7 @@
                     "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
                 }
             });
+
         });
         function solve (ans) {
             var url = "http://educatea.com.ar/api/v1/challenge/exercises/solve";

@@ -68,7 +68,7 @@
                 opacity: .5,
                 color: '#fff'
             } });
-            if(typeof localStorage['fb_token'] == 'undefined' && localStorage['fb_token'] == null){
+            if(typeof localStorage['current_user'] == 'undefined' || localStorage['current_user'] == null){
                 window.location.href = "login.html";
             }else{
                 current_user = JSON.parse(localStorage['current_user']);
@@ -78,23 +78,23 @@
                 $('#userId').append(current_user.id);
 
                 var url = "http://educatea.com.ar/api/v1/challenge/";
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function(data){
-                    $('#exercises').append(10-data.user.daily_counter);
-                    $('#week').append(data.user.weekly_counter);
-                    $('#championship').append(data.user.championship_counter);
-                    $('#historic').append(data.user.historic_points);
-                    done();
-                },
-                error: error,
-                timeout: timeout,
-                headers: {
-                    "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
-                }
-            });
-            
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(data){
+                        $('#exercises').append(10-data.user.daily_counter);
+                        $('#week').append(data.user.weekly_counter);
+                        $('#championship').append(data.user.championship_counter);
+                        $('#historic').append(data.user.historic_points);
+                        done();
+                    },
+                    error: error,
+                    timeout: timeout,
+                    headers: {
+                        "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
+                    }
+                });
+
             }
         });
     </script>

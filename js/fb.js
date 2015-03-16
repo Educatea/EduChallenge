@@ -60,7 +60,7 @@ function login() {
                     error: errorHandler});
             } else {
                 done();
-                alert('Facebook login failed: ' + response.error);
+                alert('Facebook login failed!');
             }
         }, {scope: 'email,read_stream,publish_stream'});
 }
