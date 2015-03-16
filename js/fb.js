@@ -25,8 +25,37 @@ function login() {
                         img = { 'square': 'http://graph.facebook.com/' + data.id + '/picture?type=square', 'small': 'http://graph.facebook.com/' + data.id + '/picture?type=small', 'normal': 'http://graph.facebook.com/' + data.id + '/picture?type=normal', 'large': 'http://graph.facebook.com/' + data.id + '/picture?type=large' };
                         current_user = { 'id': data.id,'token': localStorage['fb_token'], 'name': data.name,'img': img };
                         localStorage['current_user'] = JSON.stringify(current_user);
-                        done();
-                        window.location.href = "main.html";
+
+                        var url = "http://educatea.com.ar/api/v1/challenge/";
+                        $.ajax({
+                            type: "GET",
+                            url: url,
+                            success: function(data){
+                                if(data.status == "402"){
+                                    var url = "http://educatea.com.ar/api/v1/challenge/players";
+                                    $.ajax({
+                                        dataType: "json",
+                                        data: { uid: JSON.parse(localStorage['current_user']).id, name: JSON.parse(localStorage['current_user']).name, oauth_token: JSON.parse(localStorage['current_user']).token },
+                                        type: "POST",
+                                        url: url,
+                                        success: function(data){
+                                            done();
+                                            window.location.href = "main.html";
+                                        },
+                                        error: error,
+                                        timeout: timeout
+                                    });
+                                }else{
+                                    done();
+                                    window.location.href = "main.html";
+                                }
+                            },
+                            error: error,
+                            timeout: timeout,
+                            headers: {
+                                "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
+                            }
+                        });
                     },
                     error: errorHandler});
             } else {

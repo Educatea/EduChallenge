@@ -66,7 +66,7 @@
                 window.location.replace("index.html");
             }
 
-            var url = "http://educatea.com.ar/api/v1/topics/" + getUrlVars().topic_id;
+            var url = "http://educatea.com.ar/api/v1/challenge/exercises/solve";
             $.ajax({
                 type: "GET",
                 url: url,
@@ -85,7 +85,7 @@
                 error: error,
                 timeout: timeout,
                 headers: {
-                    "Authorization": "Basic " + btoa(localStorage['email'] + ":" + localStorage['pass'])
+                    "Authorization": "Basic " + btoa(localStorage['current_user'].id + ":" + localStorage['current_user'].token)
                 }
             });
         });
