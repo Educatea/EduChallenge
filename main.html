@@ -25,7 +25,7 @@
         <img id="userPic"/>
         <hr/>
         <h3>Tenes <span id="exercises"></span> ejercicios restante para el dia de hoy!</h3>
-        <a class="btn btn-danger btn-block" href="solve.html">Jugar!</a>
+        <a class="btn btn-danger btn-block" href="solve.html" id="play">Jugar!</a>
         <h4>Weekly Score: <span id="week"></span></h4>
         <h4>Championship Score: <span id="championship"></span></h4>
         <h4>All Time Score: <span id="historic"></span></h4>
@@ -86,6 +86,9 @@
                         $('#week').append(data.user.weekly_counter);
                         $('#championship').append(data.user.championship_counter);
                         $('#historic').append(data.user.historic_points);
+                        if(data.user.daily_counter == 10){
+                            $('#play').remove();
+                        }
                         done();
                     },
                     error: error,

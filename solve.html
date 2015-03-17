@@ -65,7 +65,7 @@
                 window.location.href = "login.html";
             }
 
-            var url = "http://educatea.com.ar/api/v1/challenge/exercises/120643";
+            var url = "http://educatea.com.ar/es/api/v1/challenge/exercises/120643";
             $.ajax({
                 type: "GET",
                 url: url,
@@ -95,7 +95,7 @@
 
         });
         function solve (ans) {
-            var url = "http://educatea.com.ar/api/v1/challenge/exercises/solve";
+            var url = "http://educatea.com.ar/es/api/v1/challenge/exercises/solve";
             $.ajax({
                 dataType: "json",
                 data: { answer: ans, iteration: "1", level: level, exercise: model_name, values: val },

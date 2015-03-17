@@ -87,6 +87,9 @@
                         $('#week').append(data.user.weekly_counter);
                         $('#championship').append(data.user.championship_counter);
                         $('#historic').append(data.user.historic_points);
+                        if(data.user.daily_counter == 10){
+                            $('#play').remove();
+                        }
                         done();
                     },
                     error: error,
