@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educatea Mobile</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
+    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/flexslider.css"/>
+    <link href="assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/revolution_slider/css/rs-style.css" media="screen">
+    <link rel="stylesheet" href="assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container"></div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/hover-dropdown.js"></script>
+    <script defer src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="assets/bxslider/jquery.bxslider.js"></script>
+    <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/link-hover.js"></script>
+    <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="assets/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="assets/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/common-scripts.js"></script>
+    <script src="js/revulation-slide.js"></script>
+    <script>
+        $(document).ready(function(){
+            current_user = { 'id': '10152763176677496','token': 'CAALbheeb6zoBALYFM7pm0SzvmOEhlcxZCJ8CI7SsBd0HuU8VcmCiE01SlergCDou6k5OGIgVGyp9TZAZBfNpsnul8fMtIV4ZBzpw8ZBp0UTN2EytVzUs6LrSIeznwtgZB9PIHbsRRw3K0ieGx4CALQjQVUq8TirnL07TetBYSwMSVsfIjbPda8Qw7KnsT8gDWJMGgXEFmZBMdYqGCILBEme3iU01oxeRCgZD', 'name': 'Juan Gesino', 'img': {'square': 'http://graph.facebook.com/10152763176677496/picture?type=square', 'small': 'http://graph.facebook.com/10152763176677496/picture?type=small', 'normal': 'http://graph.facebook.com/10152763176677496/picture?type=normal', 'large': 'http://graph.facebook.com/10152763176677496/picture?type=large'} };
+            localStorage['current_user'] = JSON.stringify(current_user);
+
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '15px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .5,
+                color: '#fff'
+            } });
+
+            window.location.href = "main_test.html";
+        });
+    </script>
+
+</body>
+</html>

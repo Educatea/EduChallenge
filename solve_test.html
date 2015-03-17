@@ -30,7 +30,9 @@
 <div class="container" style="width: 100%" id="container">
 
 </div>
-<div id="clock"></div>
+<div class="countdown">
+   <span id="clock"></span>
+ </div>
 <footer class="site-footer" style="z-index: 1000; position:static; bottom:0px;">
     <div class="text-center">
         2015 © Educatea.
@@ -55,17 +57,26 @@
     <script src="js/loading.js"></script>
     <script src="js/common-scripts.js"></script>
     <script src="js/revulation-slide.js"></script>
-    <script src="cordova.js"></script>
-    <script src="openfb.js"></script>
-    <script src="jquery.countdown.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
     <script>
         $(document).ready(function(){
-            $('div#clock').countdown('2016/20/20 12:34:56');
-            if(typeof localStorage['current_user'] == 'undefined' || localStorage['current_user'] == null){
-                window.location.href = "login.html";
-            }
 
-            var url = "http://educatea.com.ar/api/v1/challenge/exercises/120643";
+            seconds = 10;
+            $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
+                var format = '%S';
+               $(this).html(event.strftime(format));
+             }).on('finish.countdown', function(event) {
+               alert('Time\'s up!');
+             });
+            
+            img = {'square': 'http://graph.facebook.com/10152763176677496/picture?type=square', 'small': 'http://graph.facebook.com/10152763176677496/picture?type=small', 'normal': 'http://graph.facebook.com/10152763176677496/picture?type=normal', 'large': 'http://graph.facebook.com/10152763176677496picture?type=large'};
+            
+            current_user = { 'id': '10152763176677496','token': 'CAALbheeb6zoBALYFM7pm0SzvmOEhlcxZCJ8CI7SsBd0HuU8VcmCiE01SlergCDou6k5OGIgVGyp9TZAZBfNpsnul8fMtIV4ZBzpw8ZBp0UTN2EytVzUs6LrSIeznwtgZB9PIHbsRRw3K0ieGx4CALQjQVUq8TirnL07TetBYSwMSVsfIjbPda8Qw7KnsT8gDWJMGgXEFmZBMdYqGCILBEme3iU01oxeRCgZD', 'name': 'Juan Gesino', 'img': img };
+
+            localStorage['current_user'] = JSON.stringify(current_user);
+
+            
+            var url = "http://localhost:3000/api/v1/challenge/exercises/120643";
             $.ajax({
                 type: "GET",
                 url: url,
@@ -86,8 +97,6 @@
                       document.getElementsByTagName("head")[0].appendChild(script);
                     })();
                 },
-                error: error,
-                timeout: timeout,
                 headers: {
                     "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
                 }
@@ -95,13 +104,15 @@
 
         });
         function solve (ans) {
-            var url = "http://educatea.com.ar/api/v1/challenge/exercises/solve";
+            $('#clock').countdown('stop');
+            var url = "http://localhost:3000/api/v1/challenge/exercises/solve";
             $.ajax({
                 dataType: "json",
                 data: { answer: ans, iteration: "1", level: level, exercise: model_name, values: val },
                 type: "POST",
                 url: url,
                 success: function(data){
+
                     $('#container').empty();
                     $('<h2>'+data.text+'</h2>').appendTo('#container');
                     $('<h2>'+data.answer_submitted+'</h2>').appendTo('#container');
@@ -111,8 +122,6 @@
 
                     MathJax.Hub.Typeset()
                 },
-                error: error,
-                timeout: timeout,
                 headers: {
                     "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
                 }
