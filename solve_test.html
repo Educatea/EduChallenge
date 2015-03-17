@@ -61,7 +61,7 @@
     <script>
         $(document).ready(function(){
 
-            seconds = 10;
+            seconds = 30;
             $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
                 var format = '%S';
                $(this).html(event.strftime(format));

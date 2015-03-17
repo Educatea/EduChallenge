@@ -30,7 +30,11 @@
 <div class="container" style="width: 100%" id="container">
 
 </div>
-<div id="clock"></div>
+
+<div class="countdown">
+   <span id="clock"></span>
+ </div>
+
 <footer class="site-footer" style="z-index: 1000; position:static; bottom:0px;">
     <div class="text-center">
         2015 © Educatea.
@@ -60,7 +64,16 @@
     <script src="jquery.countdown.min.js"></script>
     <script>
         $(document).ready(function(){
-            $('div#clock').countdown('2016/20/20 12:34:56');
+            
+            seconds = 30;
+            $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
+                var format = '%S';
+               $(this).html(event.strftime(format));
+             }).on('finish.countdown', function(event) {
+               alert('Time\'s up!');
+             });
+
+
             if(typeof localStorage['current_user'] == 'undefined' || localStorage['current_user'] == null){
                 window.location.href = "login.html";
             }
