@@ -58,6 +58,11 @@
     <script src="openfb.js"></script>
     <script type="text/javascript" src="js/fb.js"></script>
     <script>
+        document.addEventListener("backbutton", function(e){
+            navigator.app.exitApp();
+        }, false);
+    </script>
+    <script>
         $(document).ready(function(){
             $.blockUI({ css: {
                 border: 'none',
@@ -97,7 +102,6 @@
                         "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
                     }
                 });
-
             }
         });
     </script>
