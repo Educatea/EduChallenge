@@ -20,25 +20,73 @@
 <body>
     <div class="container" style="width: 100%">
 
-
-        <h1>Hola <span id="userName"></span>!</h1>
-        <img id="userPic"/>
+        <div id="userInfo">
         <hr/>
-        <h3>Tenes <span id="exercises"></span> ejercicios restante para el dia de hoy!</h3>
-        <a class="btn btn-danger btn-block" href="solve.html" id="play">Jugar!</a>
-        <h4>Weekly Score: <span id="week"></span></h4>
-        <h4>Championship Score: <span id="championship"></span></h4>
-        <h4>All Time Score: <span id="historic"></span></h4>
+
+        <div class="row state-overview">
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol terques">
+                              <i class="fa fa-user"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class="count" id="rankingValue">5</h1>
+                              <p>Ránking</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol red">
+                              <i class="fa fa-star"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class=" count2" id="weeklyVal"></h1>
+                              <p>Puntaje semanal</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol yellow">
+                              <i class="fa fa-trophy"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class=" count3" id="championshipVal"></h1>
+                              <p>Semanas victoriosas</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol blue">
+                              <i class="fa fa-bar-chart-o"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class=" count4" id="historicVal"></h1>
+                              <p>Puntaje histórico</p>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+        <br>
+        <br>
+        <br>
+
+                <a class="btn btn-danger btn-block btn-lg" style="margin-bottom:8%;" href="solve_test.html"><i class="fa fa-pencil"></i>  Jugar</a>
 
 
-        <br>
-        <br>
-        <br>
-        <p>After logging out, you'll have to login again and provide your Facebook credentials.</p>
-        <button class="btn btn-block" onclick="logout()">Logout</button>
+        <p align="center" style="color: #000000;">Si cierra sesión deberá volver a ingresar sus credenciales</p>
+        <button class="btn btn-block">Salir</button>
         <hr/>
 
     </div>
+     </div>
+    <footer class="site-footer" style="z-index: 1000; bottom:0px; position:fixed; width:100%;">
+      <div class="text-center">
+        2015 © Desarrollado por Educatea
+      </div>
+    </footer>
     <script src="js/jquery.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -76,21 +124,21 @@
             if(typeof localStorage['current_user'] == 'undefined' || localStorage['current_user'] == null){
                 window.location.href = "login.html";
             }else{
-                current_user = JSON.parse(localStorage['current_user']);
-                $('#userName').append(current_user.name);
-                $('#userPic').attr('src', current_user.img.normal);
+                 current_user = JSON.parse(localStorage['current_user']);
+                html ='<div class="row" style="margin-top:5%;"><div class="col-lg-12"><section class="panel"><div class="twt-feed blue-bg"><h1>'+current_user.name+'</h1><p></p><a href="#"><img src="' +current_user.img.normal+'" alt=""></a></div><div class="weather-category twt-category"><h3 style="text-align:center;"><span id="leftEx" style="font-weight:bold; font-size:40px;"></span> <br>Ejercicios restantes para hoy</h3></div></section></div></div><hr>';
+                $(html).prependTo('#userInfo');
                 $('#userToken').append(current_user.token);
                 $('#userId').append(current_user.id);
 
-                var url = "http://educatea.com.ar/api/v1/challenge/";
+                var url = "http://localhost:3000/api/v1/challenge/";
                 $.ajax({
                     type: "GET",
                     url: url,
                     success: function(data){
-                        $('#exercises').append(10-data.user.daily_counter);
-                        $('#week').append(data.user.weekly_counter);
-                        $('#championship').append(data.user.championship_counter);
-                        $('#historic').append(data.user.historic_points);
+                        $('#leftEx').text(10-data.user.daily_counter);
+                        $('#weeklyVal').text(data.user.weekly_counter);
+                        $('#championshipVal').text(data.user.championship_counter);
+                        $('#historicVal').text(data.user.historic_points);
                         if(data.user.daily_counter == 10){
                             $('#play').remove();
                         }
