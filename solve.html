@@ -31,7 +31,9 @@
 <div class="container" style="width: 100%" id="container">
 
 </div>
-
+<div class="container" style="width: 100%">
+<a class="btn btn-success btn-block" href="main.html">Back</a>
+</div>
 <div class="countdown">
    <span id="clock"></span>
  </div>
@@ -67,13 +69,13 @@
     <script>
         $(document).ready(function(){
             
-            seconds = 30;
-            $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
-                var format = '%S';
-               $(this).html(event.strftime(format));
-             }).on('finish.countdown', function(event) {
-               alert('Time\'s up!');
-             });
+            // seconds = 30;
+            // $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
+            //     var format = '%S';
+            //    $(this).html(event.strftime(format));
+            //  }).on('finish.countdown', function(event) {
+            //    alert('Time\'s up!');
+            //  });
 
 
             if(typeof localStorage['current_user'] == 'undefined' || localStorage['current_user'] == null){
@@ -124,7 +126,7 @@
                     $('<h2>'+data.explain+'</h2>').appendTo('#container');
                     $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
 
-                    MathJax.Hub.Typeset()
+                    MathJax.Hub.Typeset();
                 },
                 error: error,
                 timeout: timeout,
