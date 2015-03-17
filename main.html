@@ -73,7 +73,7 @@
         <br>
         <br>
 
-                <a class="btn btn-danger btn-block btn-lg" style="margin-bottom:8%;" href="solve_test.html"><i class="fa fa-pencil"></i>  Jugar</a>
+                <a class="btn btn-danger btn-block btn-lg" style="margin-bottom:8%;" href="solve.html"><i class="fa fa-pencil"></i>  Jugar</a>
 
 
         <p align="center" style="color: #000000;">Si cierra sesión deberá volver a ingresar sus credenciales</p>
@@ -130,7 +130,7 @@
                 $('#userToken').append(current_user.token);
                 $('#userId').append(current_user.id);
 
-                var url = "http://localhost:3000/api/v1/challenge/";
+                var url = "http://educatea.com.ar/api/v1/challenge/";
                 $.ajax({
                     type: "GET",
                     url: url,
