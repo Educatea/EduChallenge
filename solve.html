@@ -186,6 +186,8 @@
                     }
 
                     $('#buttons').append('<a class="btn btn-danger btn-block" href="solve.html">Siguiente</a>');
+                    $('.btn-success').remove();
+                    $('#buttons').append('<a class="btn btn-success btn-block" href="main.html">Back</a>');
 
                     MathJax.Hub.Typeset()
                 },
