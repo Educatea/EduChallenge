@@ -62,7 +62,7 @@ function login() {
                 done();
                 alert('Facebook login failed!');
             }
-        }, {scope: 'email,read_stream,publish_stream'});
+        }, {scope: 'email,read_stream,publish_stream,user_friends'});
 }
 
 function getInfo() {
