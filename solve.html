@@ -30,8 +30,8 @@
 <div class="container" style="width: 100%" id="container">
 
 </div>
-<div class="container" style="width: 100%">
-<a class="btn btn-success btn-block" onclick="giveUp();">Paso <i class="fa fa-times"></i></a>
+<div class="container" style="width: 100%" id="buttons">
+<a class="btn btn-success btn-block" onclick="paso();">Paso <i class="fa fa-times"></i></a>
 </div>
 <div class="countdown">
    <span id="clock" style="display:none;"></span>
@@ -69,11 +69,33 @@
     <script src="openfb.js"></script>
     <script>
         document.addEventListener("backbutton", function(e){
-            giveUp();
+            if(solved){
+                window.location.href = "main.html";
+            }else{
+                giveUp();
+            }
         }, false);
     </script>
     <script>
         $(document).ready(function(){
+
+            var url = "http://educatea.com.ar/api/v1/challenge/";
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data){
+                    if(data.daily_counter >= 10){
+                        window.location.href = "main.html";
+                    }
+                },
+                error: error,
+                timeout: timeout,
+                headers: {
+                    "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
+                }
+            });
+
+            solved = false;
             
             if(typeof localStorage['current_user'] == 'undefined' || localStorage['current_user'] == null){
                 window.location.href = "login.html";
@@ -131,6 +153,7 @@
 
         });
         function solve (ans) {
+            solved = true;
             stopCountdown();
             $('.countdown').remove();
             var url = "http://educatea.com.ar/es/api/v1/challenge/exercises/solve";
@@ -146,6 +169,8 @@
                         $('<h2>'+data.correct+'</h2>').appendTo('#container');
                         $('<h2>'+data.explain+'</h2>').appendTo('#container');
                         $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
+
+                        $('#buttons').append('<a class="btn btn-danger btn-block" href="solve.html">Siguiente</a>');
 
                     MathJax.Hub.Typeset();
                 },
@@ -166,6 +191,13 @@
             window.location.href = "main.html";
         }
 
+        function paso(){
+            if(solved){
+                window.location.href = "main.html";
+            }else{
+                giveUp();
+            }
+        }
     </script>
 
 </body>
