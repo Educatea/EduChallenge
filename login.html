@@ -51,6 +51,11 @@
     <script src="openfb.js"></script>
     <script type="text/javascript" src="js/fb.js"></script>
     <script>
+        document.addEventListener("backbutton", function(e){
+            navigator.app.exitApp();
+        }, false);
+    </script>
+    <script>
         $(document).ready(function(){
             if(typeof localStorage['current_user'] !== 'undefined' && localStorage['current_user'] !== null){
                 window.location.href = "main.html";
