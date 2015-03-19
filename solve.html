@@ -30,9 +30,7 @@
 <div class="container" style="width: 100%" id="container">
 
 </div>
-<div class="container" style="width: 100%" id="buttons">
-<a class="btn btn-success btn-block" onclick="paso();">Paso <i class="fa fa-times"></i></a>
-</div>
+
 <div class="countdown">
    <span id="clock" style="display:none;"></span>
 
@@ -40,6 +38,9 @@
 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
 <span class="sr-only">1% Complete</span></div></div></div>
 
+<div class="container" style="width: 100%; margin-bottom: 10px" id="buttons">
+<a class="btn btn-success btn-block" onclick="paso();"><i class="fa fa-times"></i> Paso</a>
+</div>
 
  <footer class="site-footer" style="z-index: 1000; bottom:0px; position:absolute; width:100%;">
       <div class="text-center">
@@ -185,9 +186,9 @@
                         };                           
                     }
 
-                    $('#buttons').append('<a class="btn btn-danger btn-block" href="solve.html">Siguiente</a>');
+                    $('#buttons').append('<a class="btn btn-danger btn-block" href="solve.html"><i> class="fa fa-arrow-right"</i> Siguiente</a>');
                     $('.btn-success').remove();
-                    $('#buttons').append('<a class="btn btn-success btn-block" href="main.html">Back</a>');
+                    $('#buttons').append('<a class="btn btn-success btn-block" href="main.html"><i> class="fa fa-arrow-left"</i> Atras</a>');
 
                     MathJax.Hub.Typeset()
                 },
