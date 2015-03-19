@@ -102,6 +102,7 @@ function logout() {
         function() {
             localStorage.removeItem('fb_token');
             localStorage.removeItem('current_user');
+            navigator.app.exitApp();
             window.location.href = "login.html";
         },
         errorHandler);
