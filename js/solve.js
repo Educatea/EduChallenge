@@ -74,18 +74,27 @@
 
                     if(data.answer_submitted == 'Se acabo el tiempo!'){
                         // La respuesta esta mal porque se le acabo el tiempo
-                        $('<h2>'+data.text+'</h2>').appendTo('#container');
-                        $('<h2>'+data.answer_submitted+'</h2>').appendTo('#container');
-                        $('<h2>'+data.correct+'</h2>').appendTo('#container');
+                        $('<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.text+'</h2></li></ul>').appendTo('#container');
+                        if(data.correct == "true") {
+                            $('<ul class="breadcrumb" style="text-align: center;"><li><h1 style="color:green;">'+data.answer_submitted+'</h1><img src="img/right.png" style="display: block; margin-left:auto; margin-right:auto; width:80%; margin-top:10%; width:40%;"></li></ul>').appendTo('#container');
+                        } else {
+                            $('<ul class="breadcrumb" style="text-align: center;"><li><h1 style="color:red;">'+data.answer_submitted+'</h1><img src="img/wrong.png" style="display: block; margin-left:auto; margin-right:auto; width:80%; margin-top:10%; width:40%;"></li></ul>').appendTo('#container');
+                            $('<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.explain+'</h2></li></ul>').appendTo('#container');
+                            $('<ul class="breadcrumb" style="text-align: center;"><li><h2>La correcta era: </h2><h2 style="color:green;">'+data.correct_answer+'</h2></li></ul>').appendTo('#container');
+                       
+                        };  
                         $('<h2>'+data.explain+'</h2>').appendTo('#container');
                         $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
                     }else{
                         // Respondio mal
-                        $('<h2>'+data.text+'</h2>').appendTo('#container');
-                        $('<h2>'+data.answer_submitted+'</h2>').appendTo('#container');
-                        $('<h2>'+data.correct+'</h2>').appendTo('#container');
-                        $('<h2>'+data.explain+'</h2>').appendTo('#container');
-                        $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
+                        $('<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.text+'</h2></li></ul>').appendTo('#container');
+                         if(data.correct == "true") {
+                            $('<ul class="breadcrumb" style="text-align: center;"><li><h1 style="color:green;">'+data.answer_submitted+'</h1><img src="img/right.png" style="display: block; margin-left:auto; margin-right:auto; width:80%; margin-top:10%; width:40%;"></li></ul>').appendTo('#container');
+                        } else {
+                            $('<ul class="breadcrumb" style="text-align: center;"><li><h1 style="color:red;">'+data.answer_submitted+'</h1><img src="img/wrong.png" style="display: block; margin-left:auto; margin-right:auto; width:80%; margin-top:10%; width:40%;"></li></ul>').appendTo('#container');
+                            $('<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.explain+'</h2></li></ul>').appendTo('#container');
+                            $('<ul class="breadcrumb" style="text-align: center;"><li><h2>La correcta era: </h2><h2 style="color:green;">'+data.correct_answer+'</h2></li></ul>').appendTo('#container');
+                        };                           
                     }
 
                     MathJax.Hub.Typeset()
