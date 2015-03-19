@@ -26,86 +26,11 @@
                           <header class="panel-heading" align="center" style="font-weight:bold;">
                               Top 5 Ránking
                           </header>
-                          <section class="panel">
-                          <div class="panel-body">
-                              <div class="fb-user-thumb">
-                                  <img src="img/sad.png" alt="">
-                                                                  <h3 style="margin-top:-25px; font-size:45px; color: #BEA20B;"><i class="fa fa-trophy"></i></h3>
 
-                              </div>
-                              <div class="fb-user-details">
-                                  <h3><a href="#" class="#">Margarita Elina</a></h3>
-        <p style="font-weight: bold; color: #74829C;">7 Respuestas correctas esta semana</p>                              </div>
-                              <div class="clearfix"></div>
-                              
-                              
+                          <section class="panel" id="friends_rank">
 
-
-                              
-
-                          </div>
-                          <div class="panel-body" style="background-color: #FDEEB4;">
-                              <div class="fb-user-thumb">
-                                  <img src="img/sad.png" alt="">
-                              </div>
-                              <div class="fb-user-details">
-                                  <h3><a href="#" class="#">Margarita Elina</a></h3>
-        <p style="font-weight: bold; color: #74829C;">7 Respuestas correctas esta semana</p>                              </div>
-                              <div class="clearfix"></div>
-                              
-                              
-
-
-                              
-
-                          </div>
-                          <div class="panel-body">
-                              <div class="fb-user-thumb">
-                                  <img src="img/sad.png" alt="">
-                              </div>
-                              <div class="fb-user-details">
-                                  <h3><a href="#" class="#">Margarita Elina</a></h3>
-        <p style="font-weight: bold; color: #74829C;">7 Respuestas correctas esta semana</p>                              </div>
-                              <div class="clearfix"></div>
-                              
-                              
-
-
-                              
-
-                          </div>
-                          <div class="panel-body">
-                              <div class="fb-user-thumb">
-                                  <img src="img/sad.png" alt="">
-                              </div>
-                              <div class="fb-user-details">
-                                  <h3><a href="#" class="#">Margarita Elina</a></h3>
-                                  <p style="font-weight: bold; color: #74829C;">7 Respuestas correctas esta semana</p>
-                              </div>
-                              <div class="clearfix"></div>
-                              
-                              
-
-
-                              
-
-                          </div>
-                          <div class="panel-body">
-                              <div class="fb-user-thumb">
-                                  <img src="img/sad.png" alt="">
-                              </div>
-                              <div class="fb-user-details">
-                                  <h3><a href="#" class="#">Margarita Elina</a></h3>
-        <p style="font-weight: bold; color: #74829C;">7 Respuestas correctas esta semana</p>                              </div>
-                              <div class="clearfix"></div>
-                              
-                              
-
-
-                              
-
-                          </div>
                       </section>
+                      
                       </section>
         <div class="row state-overview">
                   <div class="col-lg-3 col-sm-6">
@@ -114,7 +39,7 @@
                               <i class="fa fa-user"></i>
                           </div>
                           <div class="value">
-                              <h1 class="count" id="rankingValue" style="font-weight: bold; color: #74829C;">5</h1>
+                              <h1 class="count" id="rankingValue" style="font-weight: bold; color: #74829C;"></h1>
                               <p style="font-weight: bold; color: #74829C;">Ránking</p>
                           </div>
                       </section>
@@ -222,6 +147,33 @@
                         if(data.user.daily_counter == 10){
                             $('#play').remove();
                         }
+
+                        rank = 1;
+                        html = '';
+                        $.each(data.user.get_friends_rank, function(key, val){
+
+                          if(rank == 1){
+                            trophy = '<h3 style="margin-top:-25px; font-size:45px; color: #BEA20B;"><i class="fa fa-trophy"></i></h3>';
+                          }else{
+                            trophy = '';
+                          }
+
+                          if (val.uid == JSON.parse(localStorage['current_user']).id) {
+                            background = 'style="background-color: #FDEEB4;"';
+                            my_rank = rank;
+                          }else{
+                            background = '';
+                          }
+
+                          html = html + '<div class="panel-body" '+background+'><div class="fb-user-thumb"><img src="http://graph.facebook.com/' + val.uid + '/picture?type=small" alt="">'+trophy+'</div><div class="fb-user-details"><h3><a href="#" class="#">'+val.name+'</a></h3><p style="font-weight: bold; color: #74829C;">'+val.weekly_counter+' Respuestas correctas esta semana</p></div><div class="clearfix"></div></div>';
+
+                          rank++;
+                        });
+
+                        $('#friends_rank').append(html);
+
+                        $('#rankingValue').text(my_rank);
+                        
                         done();
                     },
                     error: error,
