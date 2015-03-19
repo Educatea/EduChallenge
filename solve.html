@@ -96,25 +96,25 @@
                       script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
                       document.getElementsByTagName("head")[0].appendChild(script);
 
-                        // seconds = 15;
-                        // total = 100/seconds;
-                        // $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
-                        //     var format = '%S';
-                        //     $(".progress-bar").css("width",(event.strftime(format)*total)+"%");
-                        //     if(event.strftime(format)*total < 50){
-                        //         $(".progress-bar").removeClass( "progress-bar-success" );
-                        //         $(".progress-bar").addClass( "progress-bar-warning" );
-                        //     };
+                        seconds = 15;
+                        total = 100/seconds;
+                        $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
+                            var format = '%S';
+                            $(".progress-bar").css("width",(event.strftime(format)*total)+"%");
+                            if(event.strftime(format)*total < 50){
+                                $(".progress-bar").removeClass( "progress-bar-success" );
+                                $(".progress-bar").addClass( "progress-bar-warning" );
+                            };
 
-                        //     if(event.strftime(format)*total < 25){
-                        //         $(".progress-bar").removeClass( "progress-bar-warning" );
-                        //         $(".progress-bar").addClass( "progress-bar-danger" );                            };
+                            if(event.strftime(format)*total < 25){
+                                $(".progress-bar").removeClass( "progress-bar-warning" );
+                                $(".progress-bar").addClass( "progress-bar-danger" );                            };
                             
-                        //     $(this).html(event.strftime(format));
-                        //  }).on('finish.countdown', function(event) {
-                        //     $('#container').empty();
-                        //     solve('Se acabo el tiempo!');
-                        //  });
+                            $(this).html(event.strftime(format));
+                         }).on('finish.countdown', function(event) {
+                            $('#container').empty();
+                            solve('Se acabo el tiempo!');
+                         });
 
                     })();
                 },
@@ -127,8 +127,8 @@
 
         });
         function solve (ans) {
-            // $('#clock').countdown('stop');
-            // $('.countdown').remove();
+            $('#clock').countdown('stop');
+            $('.countdown').remove();
             var url = "http://educatea.com.ar/es/api/v1/challenge/exercises/solve";
             $.ajax({
                 dataType: "json",
