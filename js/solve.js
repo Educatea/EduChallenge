@@ -94,6 +94,8 @@
                         };                           
                     }
 
+                    $('#buttons').append('<a class="btn btn-danger btn-block" href="solve.html">Siguiente</a>');
+                    
                     MathJax.Hub.Typeset()
                 },
                 headers: {
