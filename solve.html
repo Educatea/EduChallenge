@@ -82,8 +82,7 @@
                 type: "GET",
                 url: url,
                 success: function(data){
-                    if(data.daily_counter >= 10){
-                        alert(data.daily_counter);
+                    if(data.user.daily_counter >= 10){
                         window.location.href = "main.html";
                     }
                 },
