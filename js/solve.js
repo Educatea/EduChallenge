@@ -94,7 +94,9 @@
                         };                           
                     }
 
-                    $('#buttons').append('<a class="btn btn-danger btn-block" href="solve.html">Siguiente</a>');
+                    $('#buttons').append('<a class="btn btn-danger btn-block" href="solve_test.html">Siguiente</a>');
+                    $('.btn-success').remove();
+                    $('#buttons').append('<a class="btn btn-success btn-block" href="main_test.html">Back</a>');
                     
                     MathJax.Hub.Typeset()
                 },
@@ -103,6 +105,19 @@
                 }
             });
         }
-        function stopCountdown(){
+function stopCountdown(){
           clearInterval(countdown);
+        }
+
+        function giveUp(){
+            solve('Give up!');
+            window.location.href = "main_test.html";
+        }
+
+        function paso(){
+            if(solved){
+                window.location.href = "main_test.html";
+            }else{
+                giveUp();
+            }
         }
