@@ -77,11 +77,14 @@
     <script>
         $(document).ready(function(){
 
+            alert(1);
+
             var url = "http://educatea.com.ar/api/v1/challenge/";
             $.ajax({
                 type: "GET",
                 url: url,
                 success: function(data){
+                    alert(2);
                     if(data.daily_counter >= 10){
                         window.location.href = "main.html";
                     }
@@ -94,16 +97,19 @@
             });
 
             solved = false;
+            alert(solved);
             
             if(typeof localStorage['current_user'] == 'undefined' || localStorage['current_user'] == null){
                 window.location.href = "login.html";
             }
 
             var url = "http://educatea.com.ar/es/api/v1/challenge/exercises/120643";
+            alert(url);
             $.ajax({
                 type: "GET",
                 url: url,
                 success: function(data){
+                    alert(3);
                     model_name = data.model_name;
                     val = data.values;
                     level = data.level;
