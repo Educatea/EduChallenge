@@ -31,7 +31,7 @@
 
 </div>
 <div class="container" style="width: 100%">
-<a class="btn btn-success btn-block" href="main.html">Back</a>
+<a class="btn btn-success btn-block" onclick="giveUp();">Paso <i class="fa fa-times"></i></a>
 </div>
 <div class="countdown">
    <span id="clock" style="display:none;"></span>
@@ -67,8 +67,11 @@
     <script src="js/revulation-slide.js"></script>
     <script src="cordova.js"></script>
     <script src="openfb.js"></script>
-    <script src="jquery.countdown.min.js"></script>
-  
+    <script>
+        document.addEventListener("backbutton", function(e){
+            giveUp();
+        }, false);
+    </script>
     <script>
         $(document).ready(function(){
             
@@ -86,7 +89,7 @@
                     level = data.level;
                     html = '<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.generate_text+'</h2></li></ul></div><br><div style="margin-left:10%;">';
                     $.each(data.answers, function(key, val){
-                        html = html + '<a class="btn btn-info btn-lg" style="margin-right:10px; width:20%;" onclick="solve('+val+')">' + val + '</a>';
+                        html = html + '<a class="btn btn-info btn-lg" style="margin-right:10px; width:20%;" onclick="stopCountdown();solve('+val+')">' + val + '</a>';
                     });
                     html = html + '</div><br><br>';
                     $(html).appendTo('#container');
@@ -96,25 +99,26 @@
                       script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
                       document.getElementsByTagName("head")[0].appendChild(script);
 
-                        seconds = 15;
+                        seconds = 300;
                         total = 100/seconds;
-                        $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
-                            var format = '%S';
-                            $(".progress-bar").css("width",(event.strftime(format)*total)+"%");
-                            if(event.strftime(format)*total < 50){
+                        countdown = setInterval(function(){
+                          
+                          $(".progress-bar").css("width",(seconds*total)+"%");
+                            if(seconds*total < 50){
                                 $(".progress-bar").removeClass( "progress-bar-success" );
                                 $(".progress-bar").addClass( "progress-bar-warning" );
                             };
 
-                            if(event.strftime(format)*total < 25){
+                            if(seconds*total < 20){
                                 $(".progress-bar").removeClass( "progress-bar-warning" );
-                                $(".progress-bar").addClass( "progress-bar-danger" );                            };
-                            
-                            $(this).html(event.strftime(format));
-                         }).on('finish.countdown', function(event) {
-                            $('#container').empty();
+                                $(".progress-bar").addClass( "progress-bar-danger" );                           
+                            };
+                          if(seconds*total <= 0){
                             solve('Se acabo el tiempo!');
-                         });
+                          };
+                          
+                          seconds--;  
+                        }, 50);
 
                     })();
                 },
@@ -127,7 +131,7 @@
 
         });
         function solve (ans) {
-            $('#clock').countdown('stop');
+            stopCountdown();
             $('.countdown').remove();
             var url = "http://educatea.com.ar/es/api/v1/challenge/exercises/solve";
             $.ajax({
@@ -151,6 +155,15 @@
                     "Authorization": "Basic " + btoa(JSON.parse(localStorage['current_user']).id + ":" + JSON.parse(localStorage['current_user']).token)
                 }
             });
+        }
+
+        function stopCountdown(){
+          clearInterval(countdown);
+        }
+
+        function giveUp(){
+            solve('Give up!');
+            window.location.href = "main.html";
         }
 
     </script>
