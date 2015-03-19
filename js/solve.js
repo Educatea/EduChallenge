@@ -85,7 +85,7 @@
                     }else{
                         // Respondio mal
                         $('<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.text+'</h2></li></ul>').appendTo('#container');
-                         if(data.correct == "true") {
+                         if(data.correct == true) {
                             $('<ul class="breadcrumb" style="text-align: center;"><li><h1 style="color:green;">'+data.answer_submitted+'</h1><img src="img/right.png" style="display: block; margin-left:auto; margin-right:auto; width:80%; margin-top:10%; width:40%;"></li></ul>').appendTo('#container');
                         } else {
                             $('<ul class="breadcrumb" style="text-align: center;"><li><h1 style="color:red;">'+data.answer_submitted+'</h1><img src="img/wrong.png" style="display: block; margin-left:auto; margin-right:auto; width:80%; margin-top:10%; width:40%;"></li></ul>').appendTo('#container');
