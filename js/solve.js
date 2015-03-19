@@ -20,7 +20,7 @@
                     level = data.level;
                     html = '<ul class="breadcrumb" style="text-align: center;"><li><h2>'+data.generate_text+'</h2></li></ul></div><br><div style="margin-left:10%;">';
                     $.each(data.answers, function(key, val){
-                        html = html + '<a class="btn btn-info btn-lg" style="margin-right:10px; width:20%;" onclick="stopCountdown();solve('+val+')">' + val + '</a>';
+                        html = html + '<a class="btn btn-info btn-lg" style="margin-right:10px; width:20%;" onclick="stopCountdown();solve(\''+val+'\')">' + val + '</a>';
                     });
                     html = html + '</div><br><br>';
                     $(html).appendTo('#container');
