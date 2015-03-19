@@ -64,12 +64,7 @@
     <script src="cordova.js"></script>
     <script src="openfb.js"></script>
     <!-- <script src="jquery.countdown.min.js"></script> -->
-    <script>
-        document.addEventListener("backbutton", function(e){
-            solve('Quit');
-            window.location.href = "main.html";
-        }, false);
-    </script>
+  
     <script>
         $(document).ready(function(){
             
@@ -115,8 +110,8 @@
 
         });
         function solve (ans) {
-            $('#clock').countdown('stop');
-            $('.countdown').remove();
+            // $('#clock').countdown('stop');
+            // $('.countdown').remove();
             var url = "http://educatea.com.ar/es/api/v1/challenge/exercises/solve";
             $.ajax({
                 dataType: "json",
@@ -125,22 +120,11 @@
                 url: url,
                 success: function(data){
                     $('#container').empty();
-                    
-                    if(data.answer_submitted == 'Se acabo el tiempo!'){
-                        // La respuesta esta mal porque se le acabo el tiempo
-                        $('<h2>'+data.text+'</h2>').appendTo('#container');
+                    $('<h2>'+data.text+'</h2>').appendTo('#container');
                         $('<h2>'+data.answer_submitted+'</h2>').appendTo('#container');
                         $('<h2>'+data.correct+'</h2>').appendTo('#container');
                         $('<h2>'+data.explain+'</h2>').appendTo('#container');
                         $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
-                    }else{
-                        // Respondio mal
-                        $('<h2>'+data.text+'</h2>').appendTo('#container');
-                        $('<h2>'+data.answer_submitted+'</h2>').appendTo('#container');
-                        $('<h2>'+data.correct+'</h2>').appendTo('#container');
-                        $('<h2>'+data.explain+'</h2>').appendTo('#container');
-                        $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
-                    }
 
                     MathJax.Hub.Typeset();
                 },
