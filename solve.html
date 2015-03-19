@@ -67,6 +67,7 @@
     <script>
         document.addEventListener("backbutton", function(e){
             solve('Quit');
+            window.location.href = "main.html";
         }, false);
     </script>
     <script>
@@ -95,14 +96,14 @@
                       script.type = "text/javascript";
                       script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
                       document.getElementsByTagName("head")[0].appendChild(script);
-                      seconds = 15;
-                        $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
-                            var format = '%S';
-                           $(this).html(event.strftime(format));
-                         }).on('finish.countdown', function(event) {
-                            $('#container').empty();
-                            solve('Se acabo el tiempo!');
-                         });
+                      // seconds = 15;
+                      //   $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
+                      //       var format = '%S';
+                      //      $(this).html(event.strftime(format));
+                      //    }).on('finish.countdown', function(event) {
+                      //       $('#container').empty();
+                      //       solve('Se acabo el tiempo!');
+                      //    });
                     })();
                 },
                 error: error,
