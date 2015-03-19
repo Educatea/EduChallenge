@@ -80,7 +80,7 @@
         <br>
         <br>
 
-                <a class="btn btn-danger btn-block btn-lg" style="margin-bottom:8%;" href="solve.html"><i class="fa fa-pencil"></i>  Jugar</a>
+                <a class="btn btn-danger btn-block btn-lg" style="margin-bottom:8%;" href="solve.html" id="play"><i class="fa fa-pencil"></i>  Jugar</a>
 
 
         <p align="center" style="color: #000000;">Si cierra sesión deberá volver a ingresar sus credenciales</p>
@@ -146,7 +146,7 @@
                         $('#weeklyVal').text(data.user.weekly_counter);
                         $('#championshipVal').text(data.user.championship_counter);
                         $('#historicVal').text(data.user.historic_points);
-                        if(data.user.daily_counter == 10){
+                        if(data.user.daily_counter >= 10){
                             $('#play').remove();
                         }
 
