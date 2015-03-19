@@ -61,15 +61,14 @@
     <script src="js/revulation-slide.js"></script>
     <script src="js/jquery.countdown.min.js"></script>
     <script>
+        document.addEventListener("backbutton", function(e){
+            solve('Quit');
+        }, false);
+    </script>
+    <script>
         $(document).ready(function(){
 
-            seconds = 30;
-            $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
-                var format = '%S';
-               $(this).html(event.strftime(format));
-             }).on('finish.countdown', function(event) {
-               alert('Time\'s up!');
-             });
+            
             
             img = {'square': 'http://graph.facebook.com/10152763176677496/picture?type=square', 'small': 'http://graph.facebook.com/10152763176677496/picture?type=small', 'normal': 'http://graph.facebook.com/10152763176677496/picture?type=normal', 'large': 'http://graph.facebook.com/10152763176677496picture?type=large'};
             
@@ -78,7 +77,7 @@
             localStorage['current_user'] = JSON.stringify(current_user);
 
             
-            var url = "http://localhost:3000/api/v1/challenge/exercises/120643";
+            var url = "http://localhost:3000/es/api/v1/challenge/exercises/120643";
             $.ajax({
                 type: "GET",
                 url: url,
@@ -97,6 +96,16 @@
                       script.type = "text/javascript";
                       script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
                       document.getElementsByTagName("head")[0].appendChild(script);
+
+                      seconds = 15;
+                        $('#clock').countdown((new Date().valueOf() + seconds * 1000).toString()).on('update.countdown', function(event) {
+                            var format = '%S';
+                           $(this).html(event.strftime(format));
+                         }).on('finish.countdown', function(event) {
+                            $('#container').empty();
+                            solve('Se acabo el tiempo!');
+                         });
+
                     })();
                 },
                 headers: {
@@ -107,7 +116,8 @@
         });
         function solve (ans) {
             $('#clock').countdown('stop');
-            var url = "http://localhost:3000/api/v1/challenge/exercises/solve";
+            $('.countdown').remove();
+            var url = "http://localhost:3000/es/api/v1/challenge/exercises/solve";
             $.ajax({
                 dataType: "json",
                 data: { answer: ans, iteration: "1", level: level, exercise: model_name, values: val },
@@ -116,11 +126,22 @@
                 success: function(data){
 
                     $('#container').empty();
-                    $('<h2>'+data.text+'</h2>').appendTo('#container');
-                    $('<h2>'+data.answer_submitted+'</h2>').appendTo('#container');
-                    $('<h2>'+data.correct+'</h2>').appendTo('#container');
-                    $('<h2>'+data.explain+'</h2>').appendTo('#container');
-                    $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
+
+                    if(data.answer_submitted == 'Se acabo el tiempo!'){
+                        // La respuesta esta mal porque se le acabo el tiempo
+                        $('<h2>'+data.text+'</h2>').appendTo('#container');
+                        $('<h2>'+data.answer_submitted+'</h2>').appendTo('#container');
+                        $('<h2>'+data.correct+'</h2>').appendTo('#container');
+                        $('<h2>'+data.explain+'</h2>').appendTo('#container');
+                        $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
+                    }else{
+                        // Respondio mal
+                        $('<h2>'+data.text+'</h2>').appendTo('#container');
+                        $('<h2>'+data.answer_submitted+'</h2>').appendTo('#container');
+                        $('<h2>'+data.correct+'</h2>').appendTo('#container');
+                        $('<h2>'+data.explain+'</h2>').appendTo('#container');
+                        $('<h2>'+data.correct_answer+'</h2>').appendTo('#container');
+                    }
 
                     MathJax.Hub.Typeset()
                 },
