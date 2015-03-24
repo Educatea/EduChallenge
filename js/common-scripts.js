@@ -107,7 +107,7 @@ function initPushwoosh()
             console.warn('user data: ' + JSON.stringify(userData));
         }
                                      
-        alert(title);
+        // alert(title);
     });
  
     //initialize Pushwoosh with projectid: "GOOGLE_PROJECT_ID", pw_appid : "PUSHWOOSH_APP_ID". This will trigger all pending push notifications on start.
