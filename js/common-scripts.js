@@ -117,7 +117,7 @@ function initPushwoosh()
     pushNotification.registerDevice(
         function(status) {
             var pushToken = status;
-            alert('push token: ' + pushToken);
+            $('#token').append('push token: ' + pushToken);
         },
         function(status) {
             console.warn(JSON.stringify(['failed to register ', status]));
