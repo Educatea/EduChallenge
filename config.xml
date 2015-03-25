@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:cdv = "http://cordova.apache.org/ns/1.0"
         id        = "com.educatea.educhallenge"
-        version   = "3.0">
+        version   = "1.0">
 
     <name>EduChallenge</name>
 
@@ -13,8 +13,8 @@
         Compite con tus amigos con ejercicos de Educatea.
     </description>
 
-    <author href="http://educatea.com.ar" email="juanegsino@gmail.com">
-        Juan Gesino
+    <author href="http://educatea.com.ar" email="jgsino@educatea.com.ar">
+        Educatea
     </author>
 
     <!--
@@ -74,11 +74,11 @@
     -->
 
     <!-- Define app icon for each platform. -->
-    <icon src="icons/1.png" />
-    <icon src="icons/1.png"   gap:platform="android"    gap:density="ldpi" />
-    <icon src="icons/1.png"   gap:platform="android"    gap:density="mdpi" />
-    <icon src="icons/1.png"   gap:platform="android"    gap:density="hdpi" />
-    <icon src="icons/1.png"  gap:platform="android"    gap:density="xhdpi" />
+    <icon src="icons/new_icon.png" />
+    <icon src="icons/new_icon.png"   gap:platform="android"    gap:density="ldpi" />
+    <icon src="icons/new_icon.png"   gap:platform="android"    gap:density="mdpi" />
+    <icon src="icons/new_icon.png"   gap:platform="android"    gap:density="hdpi" />
+    <icon src="icons/new_icon.png"  gap:platform="android"    gap:density="xhdpi" />
     <!--
     <icon src="res/icon/blackberry/icon-80.png"     gap:platform="blackberry" />
     <icon src="res/icon/blackberry/icon-80.png"     gap:platform="blackberry" gap:state="hover"/>
