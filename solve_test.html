@@ -16,9 +16,60 @@
     <link rel="stylesheet" href="assets/revolution_slider/rs-plugin/css/settings.css" media="screen">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="css/feedback.css" rel="stylesheet" />
 </head>
 
 <body>
+
+
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Creo que hay un error en esta pregunta</h4>
+          </div>
+          <div class="modal-body feedback">
+
+            <form onsubmit="return false;" id="feedback-form">
+              <div class="form-group">
+                <label for="name">Nombre </label>
+                <input type="text" class="form-control" placeholder="Ingresa tu nombre." id="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email </label>
+                <input type="email" class="form-control" placeholder="Ingresa tu email." id="email" required>
+              </div>
+              <div class="form-group">
+                <label for="feedback_type">Tipo </label>
+                <select class="form-control" id="feedback_type" required>
+                  <option value="wrong_exercise">Ejercicio incorrecto</option>
+                  <option value="bad_content">Mal contenido</option>
+                  <option value="suggestion">Sugerencia</option>
+                  <option value="critic">Critica</option>
+                  <option value="spelling_mistake">Error de ortografía</option>
+                  <option value="other">Otros</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="subject">Asunto </label>
+                <input type="text" class="form-control" placeholder="Ingresa un asunto." id="subject" required>
+              </div>
+              <div class="form-group">
+                <label for="body">Mensaje </label>
+                <textarea class="form-control" id="body" placeholder="Ingresa un mensaje." rows="8" required></textarea>
+              </div>
+              <input type="hidden" id="href" value="EduChallenge">
+              <input type="hidden" id="feedbackParams" value="">
+              <button class="btn btn-primary btn-block">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 <header class="header-frontend">
     <div class="navbar navbar-default navbar-static-top">
         <div class="container">
@@ -57,6 +108,7 @@
     <script src="js/common-scripts.js"></script>
     <script src="js/revulation-slide.js"></script>
     <script src="js/solve.js"></script>
+    <script src="js/feedback.js"></script>
     
 
 </body>

@@ -1,0 +1,22 @@
+textarea {
+  resize: none;
+}
+
+#modalFeedback {
+    color: white;
+    cursor: pointer !important;
+}
+
+#modalFeedback a{
+    color: white;
+}
+
+#modalFeedback:hover {
+    cursor: pointer !important;
+}
+
+
+
+#feedback-alert {
+    font-size: 13px;
+}

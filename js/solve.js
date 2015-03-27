@@ -71,6 +71,8 @@
                 url: url,
                 success: function(data){
 
+                    console.log(model_name);
+
                     $('#container').empty();
 
                     if(data.answer_submitted == 'Se acabo el tiempo!'){
@@ -97,8 +99,9 @@
 
                     $('#buttons').append('<a class="btn btn-danger btn-block" href="solve_test.html">Siguiente</a>');
                     $('.btn-success').remove();
-                    $('#buttons').append('<a class="btn btn-success btn-block" href="main_test.html">Back</a>');
-                    
+                    $('#buttons').append('<a class="btn btn-success btn-block" href="main_test.html">Atrás</a>');
+                    $('#buttons').append('<a data-toggle="modal" data-target="#feedbackModal" href="main_test.html" style="float: right;margin-top: 5px;margin-bottom: 10px;">Creo que hay un error en esta pregunta</a>');
+                    $('#feedbackParams').val('<span style="color: red;">(Este error surgio en un ejercicio de EduChallenge.<br>El ejercicio es '+model_name+' en nivel '+level+' y los parametros '+val+'.<br>La respuesta correcta es: '+data.correct_answer+'<br>El usuario ingreso: '+data.answer_submitted+')</span>');
                     MathJax.Hub.Typeset()
                 },
                 headers: {
