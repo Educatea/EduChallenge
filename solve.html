@@ -233,7 +233,7 @@
                     $('#buttons').append('<a class="btn btn-danger btn-block" href="solve.html"><i class="fa fa-arrow-right"></i> Siguiente</a>');
                     $('.btn-success').remove();
                     $('#buttons').append('<a class="btn btn-success btn-block" href="main.html"><i class="fa fa-arrow-left"></i> Atras</a>');
-                    $('#buttons').append('<a data-toggle="modal" data-target="#feedbackModal" href="main_test.html" style="float: right;margin-top: 5px;margin-bottom: 10px;">Creo que hay un error en esta pregunta</a>');
+                    $('#buttons').append('<a data-toggle="modal" data-target="#feedbackModal" style="float: right;margin-top: 5px;margin-bottom: 10px;">Creo que hay un error en esta pregunta</a>');
                     $('#feedbackParams').val('<span style="color: red;">(Este error surgio en un ejercicio de EduChallenge.<br>El ejercicio es '+model_name+' en nivel '+level+' y los parametros '+val+'.<br>La respuesta correcta es: '+data.correct_answer+'<br>El usuario ingreso: '+data.answer_submitted+')</span>');
                     MathJax.Hub.Typeset()
                 },
