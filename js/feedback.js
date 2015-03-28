@@ -16,7 +16,7 @@ $(document).ready(function(){
     url = "http://eduissue.herokuapp.com/api/v2/feedbacks";
     $.ajax({
       dataType: "json",
-      data: { name: name, email: email, feedback_type: feedback_type, subject: subject, body: body, user_id: user_id, href: href, provider: provider, uid: uid, token: token },
+      data: { name: name, email: email, feedback_type: feedback_type, subject: subject, body: body, href: href, provider: provider, uid: uid, token: token },
       type: "POST",
       url: url,
       success: function(data) {
