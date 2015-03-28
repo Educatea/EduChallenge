@@ -10,7 +10,7 @@ $(document).ready(function(){
     body = $('#feedbackParams').val();
     body =  body + '<br><br>' + $('#body').val();
     uid = JSON.parse(localStorage['current_user']).id;
-    uid = JSON.parse(localStorage['current_user']).token;
+    token = JSON.parse(localStorage['current_user']).token;
     href = $('#href').val();
     provider = "EduChallenge"
     url = "http://eduissue.herokuapp.com/api/v2/feedbacks";
