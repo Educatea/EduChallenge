@@ -9,12 +9,14 @@ $(document).ready(function(){
     subject = $('#subject').val();
     body = $('#feedbackParams').val();
     body =  body + '<br><br>' + $('#body').val();
-    user_id = JSON.parse(localStorage['current_user']).id;
+    uid = JSON.parse(localStorage['current_user']).id;
+    uid = JSON.parse(localStorage['current_user']).token;
     href = $('#href').val();
+    provider = "EduChallenge"
     url = "http://eduissue.herokuapp.com/api/v2/feedbacks";
     $.ajax({
       dataType: "json",
-      data: { name: name, email: email, feedback_type: feedback_type, subject: subject, body: body, user_id: user_id, href: href },
+      data: { name: name, email: email, feedback_type: feedback_type, subject: subject, body: body, user_id: user_id, href: href, provider: provider, uid: uid, token: token },
       type: "POST",
       url: url,
       success: function(data) {
