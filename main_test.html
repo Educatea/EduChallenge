@@ -23,13 +23,42 @@
         <div id="userInfo">
 
 <section class="panel">
-                          <header class="panel-heading" align="center" style="font-weight:bold;">
-                              Top 5 Ránking
+                          <header class="panel-heading tab-bg-dark-navy-blue ">
+                              <ul class="nav nav-tabs">
+                                  <li class="">
+                                      <a data-toggle="tab" href="#top5">Top 5 Semanal</a>
+                                  </li>
+                                  <li class="">
+                                      <a data-toggle="tab" href="#weekly">Semanas victoriosas</a>
+                                  </li>
+                                  <li class="">
+                                      <a data-toggle="tab" href="#historic">Histórico</a>
+                                  </li>
+                              </ul>
                           </header>
+                          <div class="panel-body">
+                              <div class="tab-content">
+                                  <div id="top5" class="tab-pane active">
+ <section class="panel" id="friends_rank">
 
-                          <section class="panel" id="friends_rank">
+                      </section>                                  </div>
+                                  <div id="weekly" class="tab-pane">
+ <section class="panel" id="weeks_rank">
 
+                      </section>  
+                                  </div>
+                                  <div id="historic" class="tab-pane">
+
+                                   <section class="panel" id="historic_rank">
+
+                      </section>  </div>
+                              </div>
+                          </div>
                       </section>
+
+<section class="panel">
+
+                         
                       
                       </section>
         <div class="row state-overview">
@@ -171,6 +200,54 @@
                         });
 
                         $('#friends_rank').append(html);
+                        html = '';
+                        rank = 1;
+
+                        $.each(data.user.get_friends_weeks_rank, function(key, val){
+
+                          if(rank == 1){
+                            trophy = '<h3 style="margin-top:-25px; font-size:45px; color: #BEA20B;"><i class="fa fa-trophy"></i></h3>';
+                          }else{
+                            trophy = '';
+                          }
+
+                          if (val.uid == JSON.parse(localStorage['current_user']).id) {
+                            background = 'style="background-color: #FDEEB4;"';
+                            my_rank = rank;
+                          }else{
+                            background = '';
+                          }
+
+                          html = html + '<div class="panel-body" '+background+'><div class="fb-user-thumb"><img src="http://graph.facebook.com/' + val.uid + '/picture?type=small" alt="">'+trophy+'</div><div class="fb-user-details"><h3><a href="#" class="#">'+val.name+'</a></h3><p style="font-weight: bold; color: #74829C;">'+val.championship_counter+' campeonatos semanales ganados</p></div><div class="clearfix"></div></div>';
+
+                          rank++;
+                        });
+
+                        $('#weeks_rank').append(html);
+                        html = '';
+                        rank = 1;
+
+                        $.each(data.user.get_friends_historic_rank, function(key, val){
+
+                          if(rank == 1){
+                            trophy = '<h3 style="margin-top:-25px; font-size:45px; color: #BEA20B;"><i class="fa fa-trophy"></i></h3>';
+                          }else{
+                            trophy = '';
+                          }
+
+                          if (val.uid == JSON.parse(localStorage['current_user']).id) {
+                            background = 'style="background-color: #FDEEB4;"';
+                            my_rank = rank;
+                          }else{
+                            background = '';
+                          }
+
+                          html = html + '<div class="panel-body" '+background+'><div class="fb-user-thumb"><img src="http://graph.facebook.com/' + val.uid + '/picture?type=small" alt="">'+trophy+'</div><div class="fb-user-details"><h3><a href="#" class="#">'+val.name+'</a></h3><p style="font-weight: bold; color: #74829C;">'+val.historic_points+' puntos históricos</p></div><div class="clearfix"></div></div>';
+
+                          rank++;
+                        });
+
+                        $('#historic_rank').append(html);
 
                         $('#rankingValue').text(my_rank);
                         
